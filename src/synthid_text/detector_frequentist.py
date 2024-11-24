@@ -41,7 +41,7 @@ def frequentist_score(
   sum = jnp.sum(g_values * jnp.expand_dims(mask, 2), axis=(1, 2))
   max_sum = watermarking_depth * num_unmasked
 
-  p_value = binom.cdf(sum, n=max_sum, p=0.5)
+  p_value = 1 - binom.cdf(sum - 1, n=max_sum, p=0.5)
 
   return -p_value
 
@@ -76,11 +76,15 @@ def weighted_frequentist_score(
   # Apply weights to g-values.
   g_values *= jnp.expand_dims(weights, axis=(0, 1))
 
+  T = jnp.size(g_values, axis=2)
+
   sum = jnp.sum(g_values * jnp.expand_dims(mask, 2), axis=(1, 2))
 
-  mean = watermarking_depth / 2
-  std = jnp.sum(jnp.square(weights)) / 4
+  k = sum / T
 
-  p_value = norm.cdf(sum, loc=mean, scale=std)
+  mean = watermarking_depth / 2
+  variance = jnp.sum(jnp.square(weights)) / 4
+
+  p_value = 1 - norm.cdf(k, loc=mean, scale=variance / T)
 
   return -p_value
