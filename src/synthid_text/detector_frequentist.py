@@ -76,7 +76,7 @@ def weighted_frequentist_score(
   # Apply weights to g-values.
   g_values *= jnp.expand_dims(weights, axis=(0, 1))
 
-  T = jnp.size(g_values, axis=2)
+  T = jnp.sum(mask, axis=1)
 
   sum = jnp.sum(g_values * jnp.expand_dims(mask, 2), axis=(1, 2))
 
