@@ -85,6 +85,6 @@ def weighted_frequentist_score(
   mean = watermarking_depth / 2
   variance = jnp.sum(jnp.square(weights)) / 4
 
-  p_value = 1 - norm.cdf(k, loc=mean, scale=variance / T)
+  p_value = 1 - norm.cdf(k, loc=mean, scale=jnp.sqrt(variance / T))
 
   return -p_value
