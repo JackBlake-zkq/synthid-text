@@ -1,4 +1,11 @@
-# SynthID Text
+# Testing the limits of SynthID-Text
+
+This repo adds the [Frequentist Detector](src/synthid_text/detector_frequentist.py). We add a simplified notebook for generating and downloading g-values and perplexities of samples for a wider variety of models [here](src/synthid_text/detector_frequentist.py). We use this to generate samples for Gemma 2B, Gemma 7B, Mistral 7B, Llama-3.1 8B, Llama-3.1 70B AQLM Quantized. Raw g-values and perplexities can all be found [here](frequentist_experiment_data). We analyze this data using several notebooks:
+- [Mean vs. Frequntist](notebooks/mean_vs_frequentist.ipynb) shows the equivalence between the Mean and Frequentist detectors
+- [Perplexity Detectability Tradeoff](notebooks/perplexity_detectibility_tradeoff.ipynb) plots detectability against perplexity
+- [ROC Curves](notebooks/roc_curves.ipynb) provides several ROC curve varients.
+
+# SynthID Text (Oringinl README)
 
 This repository provides a reference implementation of the SynthID Text
 watermarking and detection capabilities for the [research paper][nature-paper]
